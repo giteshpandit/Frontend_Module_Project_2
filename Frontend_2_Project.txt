@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up Form</title>
+    <style>
+        .error { color: red; display: none; }
+        .success { color: green; display: none; }
+    </style>
+</head>
+<body>
+    <form id="signupForm">
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email">
+        <span id="emailError" class="error">Invalid email. Must be more than 3 characters and contain "@" and "."</span>
+        <span id="emailSuccess" class="success">All good to go!</span>
+        <br><br>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password">
+        <span id="passwordError" class="error">Password must be more than 8 characters.</span>
+        <span id="passwordSuccess" class="success">All good to go!</span>
+        <br><br>
+
+        <button type="button" id="submitBtn">Submit</button>
+    </form>
+
+    <script src="app.js"></script>
+</body>
+</html>
+ 
+--------Javascript-------
+
+
+// JavaScript file: app.js
+
+// Event listeners for email and password input fields
+document.getElementById('email').addEventListener('input', validateEmail);
+document.getElementById('password').addEventListener('input', validatePassword);
+
+// Function to validate email
+function validateEmail() {
+    const emailInput = document.getElementById('email');
+    const emailError = document.getElementById('emailError');
+    const emailSuccess = document.getElementById('emailSuccess');
+    const emailValue = emailInput.value;
+
+    // Check if email has more than 3 characters and contains "@" and "."
+    if (emailValue.length > 3 && emailValue.includes('@') && emailValue.includes('.')) {
+        emailError.style.display = 'none';
+        emailSuccess.style.display = 'inline';
+    } else {
+        emailError.style.display = 'inline';
+        emailSuccess.style.display = 'none';
+    }
+}
+
+// Function to validate password
+function validatePassword() {
+    const passwordInput = document.getElementById('password');
+    const passwordError = document.getElementById('passwordError');
+    const passwordSuccess = document.getElementById('passwordSuccess');
+    const passwordValue = passwordInput.value;
+
+    // Check if password is more than 8 characters
+    if (passwordValue.length > 8) {
+        passwordError.style.display = 'none';
+        passwordSuccess.style.display = 'inline';
+    } else {
+        passwordError.style.display = 'inline';
+        passwordSuccess.style.display = 'none';
+    }
+}
+
+// Event listener for submit button click
+document.getElementById('submitBtn').addEventListener('click', function() {
+    if (validateEmail() && validatePassword()) {
+        // Confirmation dialog
+        if (confirm("Are you sure you want to sign up?")) {
+            alert("Successful signup!");
+        } else {
+            // Clear input values and redirect to the same page
+            document.getElementById('email').value = '';
+            document.getElementById('password').value = '';
+            location.reload();
+        }
+    }
+});
+
+
+
+
+
+
+
+
